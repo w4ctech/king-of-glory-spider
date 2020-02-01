@@ -1,10 +1,8 @@
 import axios from 'axios';
 import {Loading, Message} from 'element-ui'
-let loadinginstace;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 // 请求拦截
 axios.interceptors.request.use(config => {
-    loadinginstace = Loading.service({fullscreen: true})
     return config
 }, error => {
     return Promise.reject(error)
@@ -12,7 +10,6 @@ axios.interceptors.request.use(config => {
 
 // 响应拦截
 axios.interceptors.response.use(response => {
-    loadinginstace.close();
     if(response.status == 200 && response.data !=''){
         return response.data;
     }else{
