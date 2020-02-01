@@ -1,9 +1,16 @@
 <template>
   <div id="app">
     <router-view/>
+    <loading/>
   </div>
 </template>
-
+<script>
+  import loading from './components/loading'
+  export default {
+    name:'App',
+    components:{loading}
+  }
+</script>
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

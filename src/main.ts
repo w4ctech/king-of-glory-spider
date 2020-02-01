@@ -17,6 +17,7 @@ import 'vue-photo-preview/dist/skin.css'
 Vue.config.productionTip = false
 Vue.prototype.$api = api
 Vue.prototype.$http = http
+Vue.prototype.bus = new Vue
 Vue.use(ElementUI)
 Vue.use(preview)
 new Vue({
