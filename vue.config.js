@@ -12,5 +12,12 @@ module.exports = {
                 }
             }
         }
-    }
+    },
+    publicPath: './king-of-glory-spider/dist',
+    outputDir: 'dist',
+    lintOnSave: true,
+    assetsDir: 'static',
+    runtimeCompiler: false,
+
+
 }
