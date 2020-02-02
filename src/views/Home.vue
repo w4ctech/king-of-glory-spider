@@ -9,15 +9,14 @@
         </el-row>
       </el-header>
       <el-main v-if="TabInfo == 'hero'">
-        <span>请求回来的图片总数是{{HeroData.length}}条,对应图片有{{HeroData.length}}张</span>
+        <span class="count">共获取到{{HeroData.length}}个英雄信息</span>
         <el-table
-          :data="HeroData"
-          style="width: 100%"
+          :data="HeroTable"
           :default-sort = "{prop: 'date', order: 'descending'}"
+          style="width: 100%"
           class="hero-table">
           <el-table-column
-            label="英雄缩列图"
-            width="320">
+            label="英雄缩列图">
             <template slot-scope="HeroData">
               <img class="imgStyle" preview onerror="this.src='https://dss2.bdstatic.com/6Ot1bjeh1BF3odCf/it/u=29962016,3519493871&fm=74&app=80&f=JPEG&size=f121,121?sec=1880279984&t=4da21179420b821182155a587a4a42db'"  :preview-text="HeroData.row.title + HeroData.row.cname" :src="'/heroImg/'+HeroData.row.ename+'/'+HeroData.row.ename+'-bigskin-1.jpg'" :title="HeroData.row.title + HeroData.row.cname">
             </template>
@@ -25,14 +24,12 @@
           <el-table-column
             prop="cname"
             label="英雄姓名"
-            sortable
-            width="180">
+            sortable>
           </el-table-column>
           <el-table-column
             prop="title"
             label="伴生皮肤"
-            sortable
-            width="180">
+            sortable>
           </el-table-column>
           <el-table-column
             prop="skin_name"
@@ -41,24 +38,29 @@
           </el-table-column>
           <el-table-column
             fixed="right"
-            label="操作"
-            width="160">
+            label="操作">
             <template slot-scope="HeroData">
               <el-button  @click="handleClick(HeroData.row.ename)" type="text" size="small">查看</el-button>
             </template>
           </el-table-column>
         </el-table>
+        <el-pagination
+            class="Tab-pagination"
+            @current-change="handleCurrentChange"
+            :page-size="pageSize"
+            layout="prev, pager, next"
+            :total="HeroData.length">
+        </el-pagination>
       </el-main>
       <el-main v-if="TabInfo == 'equip'">
-        <span>请求回来的图片总数是{{EquipData.length}}条,对应图片有{{EquipData.length}}张</span>
+        <span class="count">共获取到{{EquipData.length}}件装备信息</span>
         <el-table
-          :data="EquipData"
+          :data="equipTable"
           style="width: 100%"
           :default-sort = "{prop: 'date', order: 'descending'}"
           class="equip-table">
           <el-table-column
-            label="装备缩列图"
-            width="320">
+            label="装备缩列图">
             <template slot-scope="EquipData">
               <img class="imgStyle" preview onerror="this.src='https://dss2.bdstatic.com/6Ot1bjeh1BF3odCf/it/u=29962016,3519493871&fm=74&app=80&f=JPEG&size=f121,121?sec=1880279984&t=4da21179420b821182155a587a4a42db'"  :preview-text="EquipData.row.item_name" :src="'/equipImg/itemimg/'+EquipData.row.item_id+'.jpg'" :title="EquipData.row.item_name">
             </template>
@@ -66,8 +68,7 @@
           <el-table-column
             prop="item_name"
             label="装备名称"
-            sortable
-            width="180">
+            sortable>
           </el-table-column>
           <el-table-column
             label="装备属性">
@@ -76,26 +77,32 @@
             </template>
           </el-table-column>
         </el-table>
+        <el-pagination
+          class="Tab-pagination"
+          @current-change="handleCurrentChange"
+          :page-size="pageSize"
+          layout="prev, pager, next"
+          :total="EquipData.length">
+        </el-pagination
+                >
       </el-main>
       <el-main v-if="TabInfo == 'inscription'">
-        <span>请求回来的图片总数是{{InscriptionData.length}}条,对应图片有{{InscriptionData.length}}张</span>
+        <span class="count">获取到{{InscriptionData.length}}个铭文信息</span>
         <el-table
-          :data="InscriptionData"
+          :data="InscriptionTable"
           style="width: 100%"
           :default-sort = "{prop: 'date', order: 'descending'}"
           class="inscription-table">
           <el-table-column
-            label="铭文缩列图"
-            width="320">
+            label="铭文缩列图">
             <template slot-scope="scope">
-              <img class="imgStyle" preview onerror="this.src='https://dss2.bdstatic.com/6Ot1bjeh1BF3odCf/it/u=29962016,3519493871&fm=74&app=80&f=JPEG&size=f121,121?sec=1880279984&t=4da21179420b821182155a587a4a42db'"  :preview-text="scope.row.ming_name" :src="'/equipImg/mingwen/'+scope.row.ming_id+'.png'" :title="scope.row.ming_name">
+              <img class="imgStyle" preview onerror="this.src='https://dss2.bdstatic.com/6Ot1bjeh1BF3odCf/it/u=29962016,3519493871&fm=74&app=80&f=JPEG&size=f121,121?sec=1880279984&t=4da21179420b821182155a587a4a42db'"  :preview-text="scope.row.ming_grade+'级铭文:'+scope.row.ming_name" :src="'/equipImg/mingwen/'+scope.row.ming_id+'.png'" :title="scope.row.ming_grade+'级铭文:'+scope.row.ming_name">
             </template>
           </el-table-column>
           <el-table-column
             prop="ming_name"
             label="铭文名"
-            sortable
-            width="180">
+            sortable>
           </el-table-column>
           <el-table-column
             label="铭文属性"
@@ -110,6 +117,13 @@
             sortable>
           </el-table-column>
         </el-table>
+        <el-pagination
+            class="Tab-pagination"
+            @current-change="handleCurrentChange"
+            :page-size="pageSize"
+            layout="prev, pager, next"
+            :total="InscriptionData.length">
+        </el-pagination>
       </el-main>
       <el-footer>Footer</el-footer>
     </el-container>
@@ -121,10 +135,32 @@
   name: 'home',
   data(){
     return{
+      pageSize: 5,
+      currentPage:1,
       HeroData:[],
       EquipData:[],
       InscriptionData:[],
       TabInfo:'hero'
+    }
+  },
+  computed: {
+    HeroTable() {
+      return this.HeroData.slice(
+        (this.currentPage - 1) * this.pageSize,
+        this.currentPage * this.pageSize
+      );
+    },
+    equipTable(){
+      return this.EquipData.slice(
+        (this.currentPage - 1) * this.pageSize,
+        this.currentPage * this.pageSize
+      );
+    },
+    InscriptionTable(){
+      return this.InscriptionData.slice(
+        (this.currentPage - 1) * this.pageSize,
+        this.currentPage * this.pageSize
+      );
     }
   },
   mounted() {
@@ -135,6 +171,9 @@
     })
   },
   methods:{
+    handleCurrentChange(currentPage) {
+      this.currentPage = currentPage;
+    },
     info(e){
       this.TabInfo = e
       switch (e) {
@@ -191,7 +230,11 @@
     background-color: #E9EEF3;
     color: #333;
     text-align: center;
-    line-height: 160px;
+    padding-bottom: 0;
+    .count{
+      margin-bottom: 20px;
+      display: block;
+    }
   }
 
   body > .el-container {
@@ -220,6 +263,9 @@
       height: 60px;
       cursor: pointer;
     }
+  }
+  .Tab-pagination{
+    margin: 20px;
   }
 </style>
 <style lang="scss" scoped>
