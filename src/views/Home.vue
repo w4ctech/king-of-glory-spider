@@ -16,14 +16,14 @@
           style="width: 100%"
           class="hero-table">
           <el-table-column
-            label="英雄缩列图">
+            label="缩列图">
             <template slot-scope="HeroData">
-              <img class="imgStyle" preview onerror="this.src='https://dss2.bdstatic.com/6Ot1bjeh1BF3odCf/it/u=29962016,3519493871&fm=74&app=80&f=JPEG&size=f121,121?sec=1880279984&t=4da21179420b821182155a587a4a42db'"  :preview-text="HeroData.row.title + HeroData.row.cname" :src="'/heroImg/'+HeroData.row.ename+'/'+HeroData.row.ename+'-bigskin-1.jpg'" :title="HeroData.row.title + HeroData.row.cname">
+              <img class="imgStyle" preview onerror="this.src='https://dss2.bdstatic.com/6Ot1bjeh1BF3odCf/it/u=29962016,3519493871&fm=74&app=80&f=JPEG&size=f121,121?sec=1880279984&t=4da21179420b821182155a587a4a42db'"  :preview-text="HeroData.row.title + HeroData.row.cname" :src="'https://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/'+HeroData.row.ename+'/'+HeroData.row.ename+'-bigskin-1.jpg'" :title="HeroData.row.title + HeroData.row.cname">
             </template>
           </el-table-column>
           <el-table-column
             prop="cname"
-            label="英雄姓名"
+            label="英雄名"
             sortable>
           </el-table-column>
           <el-table-column
@@ -37,7 +37,6 @@
             sortable>
           </el-table-column>
           <el-table-column
-            fixed="right"
             label="操作">
             <template slot-scope="HeroData">
               <el-button  @click="handleClick(HeroData.row.ename)" type="text" size="small">查看</el-button>
@@ -47,6 +46,7 @@
         <div class="pagination">
           <el-pagination
               class="Tab-pagination"
+              :hide-on-single-page="HeroData.length > 1"
               @current-change="handleCurrentChange"
               :page-size="pageSize"
               layout="prev, pager, next"
@@ -62,9 +62,9 @@
           :default-sort = "{prop: 'date', order: 'descending'}"
           class="equip-table">
           <el-table-column
-            label="装备缩列图">
+            label="缩列图">
             <template slot-scope="EquipData">
-              <img class="imgStyle" preview onerror="this.src='https://dss2.bdstatic.com/6Ot1bjeh1BF3odCf/it/u=29962016,3519493871&fm=74&app=80&f=JPEG&size=f121,121?sec=1880279984&t=4da21179420b821182155a587a4a42db'"  :preview-text="EquipData.row.item_name" :src="'/equipImg/itemimg/'+EquipData.row.item_id+'.jpg'" :title="EquipData.row.item_name">
+              <img class="imgStyle" preview onerror="this.src='https://dss2.bdstatic.com/6Ot1bjeh1BF3odCf/it/u=29962016,3519493871&fm=74&app=80&f=JPEG&size=f121,121?sec=1880279984&t=4da21179420b821182155a587a4a42db'"  :preview-text="EquipData.row.item_name" :src="'https://game.gtimg.cn/images/yxzj/img201606/itemimg/'+EquipData.row.item_id+'.jpg'" :title="EquipData.row.item_name">
             </template>
           </el-table-column>
           <el-table-column
@@ -81,6 +81,7 @@
         </el-table>
       <div class="pagination">
         <el-pagination
+          :hide-on-single-page="EquipData.length > 1"
           class="Tab-pagination"
           @current-change="handleCurrentChange"
           :page-size="pageSize"
@@ -97,9 +98,9 @@
           :default-sort = "{prop: 'date', order: 'descending'}"
           class="inscription-table">
           <el-table-column
-            label="铭文缩列图">
+            label="缩列图">
             <template slot-scope="scope">
-              <img class="imgStyle" preview onerror="this.src='https://dss2.bdstatic.com/6Ot1bjeh1BF3odCf/it/u=29962016,3519493871&fm=74&app=80&f=JPEG&size=f121,121?sec=1880279984&t=4da21179420b821182155a587a4a42db'"  :preview-text="scope.row.ming_grade+'级铭文:'+scope.row.ming_name" :src="'/equipImg/mingwen/'+scope.row.ming_id+'.png'" :title="scope.row.ming_grade+'级铭文:'+scope.row.ming_name">
+              <img class="imgStyle" preview onerror="this.src='https://dss2.bdstatic.com/6Ot1bjeh1BF3odCf/it/u=29962016,3519493871&fm=74&app=80&f=JPEG&size=f121,121?sec=1880279984&t=4da21179420b821182155a587a4a42db'"  :preview-text="scope.row.ming_grade+'级铭文:'+scope.row.ming_name" :src="'https://game.gtimg.cn/images/yxzj/img201606//mingwen/'+scope.row.ming_id+'.png'" :title="scope.row.ming_grade+'级铭文:'+scope.row.ming_name">
             </template>
           </el-table-column>
           <el-table-column
@@ -116,12 +117,13 @@
           </el-table-column>
           <el-table-column
             prop="ming_grade"
-            label="铭文等级"
+            label="等级"
             sortable>
           </el-table-column>
         </el-table>
         <div class="pagination">
           <el-pagination
+              :hide-on-single-page="InscriptionData.length > 1"
               class="Tab-pagination"
               @current-change="handleCurrentChange"
               :page-size="pageSize"
@@ -130,7 +132,11 @@
           </el-pagination>
         </div>
       </el-main>
-      <el-footer>Footer</el-footer>
+      <el-footer>
+        <el-row :gutter="20">
+          <el-col :span="24"><div class="grid-content bg-purple"></div>host by <a href="https://w4ctech.js.org/king-of-glory-spider/dist/index.html">king-of-glory-spider</a></el-col>
+        </el-row>
+      </el-footer>
     </el-container>
   </div>
 </template>
@@ -181,6 +187,7 @@
     },
     info(e){
       this.TabInfo = e
+      this.currentPage = 1
       switch (e) {
         case 'hero':
           this.bus.$emit('loading', true,'加载英雄列表中');
@@ -208,9 +215,11 @@
       }
     },
     handleClick(row) {
-      this.$http.get(this.$api.Hero.detail+row+'.html',true).then((result) => {
-        console.log(result)
-      })
+      this.$message('正在开发中');
+      // console.log(row)
+      // this.$http.get(this.$api.Hero.detail+row+'.html',true).then((result) => {
+      //   console.log(result)
+      // })
     },
 
   }
@@ -240,6 +249,10 @@
       margin-bottom: 20px;
       display: block;
     }
+  }
+  .el-footer{
+    margin-top: 20px;
+    line-height: 60px;
   }
 
   body > .el-container {
