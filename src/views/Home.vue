@@ -22,9 +22,11 @@
             </template>
           </el-table-column>
           <el-table-column
-            prop="cname"
             label="英雄名"
-            sortable>
+            >
+            <template slot-scope="HeroData" v-if="TabInfo == 'hero'">
+              <router-link :to="{name:'HeroInfo',params: { id: HeroData.row.ename}}"><el-button type="text" size="small">{{HeroData.row.cname}}</el-button></router-link>
+            </template>
           </el-table-column>
           <el-table-column
             prop="title"
@@ -35,12 +37,6 @@
             prop="skin_name"
             label="所有皮肤"
             sortable>
-          </el-table-column>
-          <el-table-column
-            label="操作">
-            <template slot-scope="HeroData">
-              <el-button  @click="handleClick(HeroData.row.ename)" type="text" size="small">查看</el-button>
-            </template>
           </el-table-column>
         </el-table>
         <div class="pagination">
@@ -228,14 +224,7 @@
         default:
           return e
       }
-    },
-    handleClick(row) {
-      this.$message('正在开发中');
-      // console.log(row)
-      // this.$http.get(this.$api.Hero.detail+row+'.html',true).then((result) => {
-      //   console.log(result)
-      // })
-    },
+    }
 
   }
 }
