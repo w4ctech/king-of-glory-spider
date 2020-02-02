@@ -46,7 +46,7 @@
         <div class="pagination">
           <el-pagination
               class="Tab-pagination"
-              :hide-on-single-page="HeroData.length > 1"
+              :hide-on-single-page="HeroData.length > 10"
               @current-change="handleCurrentChange"
               :page-size="pageSize"
               layout="prev, pager, next"
@@ -81,7 +81,7 @@
         </el-table>
       <div class="pagination">
         <el-pagination
-          :hide-on-single-page="EquipData.length > 1"
+          :hide-on-single-page="EquipData.length > 10"
           class="Tab-pagination"
           @current-change="handleCurrentChange"
           :page-size="pageSize"
@@ -123,7 +123,7 @@
         </el-table>
         <div class="pagination">
           <el-pagination
-              :hide-on-single-page="InscriptionData.length > 1"
+              :hide-on-single-page="InscriptionData.length > 10"
               class="Tab-pagination"
               @current-change="handleCurrentChange"
               :page-size="pageSize"
@@ -137,6 +137,21 @@
           <el-col :span="24"><div class="grid-content bg-purple"></div>host by <a href="https://w4ctech.js.org/king-of-glory-spider/dist/index.html">king-of-glory-spider</a></el-col>
         </el-row>
       </el-footer>
+      <template>
+        <el-backtop target=".el-main">
+          <div style="{
+          height: 100%;
+          width: 100%;
+          background-color: #f2f5f6;
+          box-shadow: 0 0 6px rgba(0,0,0, .12);
+          text-align: center;
+          line-height: 40px;
+          color: #1989fa;
+          }">
+            UP
+          </div>
+        </el-backtop>
+      </template>
     </el-container>
   </div>
 </template>
@@ -146,7 +161,7 @@
   name: 'home',
   data(){
     return{
-      pageSize: 5,
+      pageSize: 8,
       currentPage:1,
       HeroData:[],
       EquipData:[],
@@ -245,6 +260,8 @@
     color: #333;
     text-align: center;
     padding-bottom: 0;
+    overflow-x: hidden;
+    height: 800px;
     .count{
       margin-bottom: 20px;
       display: block;
