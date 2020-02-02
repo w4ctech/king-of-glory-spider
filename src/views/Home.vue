@@ -44,13 +44,15 @@
             </template>
           </el-table-column>
         </el-table>
-        <el-pagination
-            class="Tab-pagination"
-            @current-change="handleCurrentChange"
-            :page-size="pageSize"
-            layout="prev, pager, next"
-            :total="HeroData.length">
-        </el-pagination>
+        <div class="pagination">
+          <el-pagination
+              class="Tab-pagination"
+              @current-change="handleCurrentChange"
+              :page-size="pageSize"
+              layout="prev, pager, next"
+              :total="HeroData.length">
+          </el-pagination>
+        </div>
       </el-main>
       <el-main v-if="TabInfo == 'equip'">
         <span class="count">共获取到{{EquipData.length}}件装备信息</span>
@@ -77,14 +79,15 @@
             </template>
           </el-table-column>
         </el-table>
+      <div class="pagination">
         <el-pagination
           class="Tab-pagination"
           @current-change="handleCurrentChange"
           :page-size="pageSize"
           layout="prev, pager, next"
           :total="EquipData.length">
-        </el-pagination
-                >
+        </el-pagination>
+      </div>
       </el-main>
       <el-main v-if="TabInfo == 'inscription'">
         <span class="count">获取到{{InscriptionData.length}}个铭文信息</span>
@@ -117,13 +120,15 @@
             sortable>
           </el-table-column>
         </el-table>
-        <el-pagination
-            class="Tab-pagination"
-            @current-change="handleCurrentChange"
-            :page-size="pageSize"
-            layout="prev, pager, next"
-            :total="InscriptionData.length">
-        </el-pagination>
+        <div class="pagination">
+          <el-pagination
+              class="Tab-pagination"
+              @current-change="handleCurrentChange"
+              :page-size="pageSize"
+              layout="prev, pager, next"
+              :total="InscriptionData.length">
+          </el-pagination>
+        </div>
       </el-main>
       <el-footer>Footer</el-footer>
     </el-container>
@@ -245,8 +250,8 @@
   }
   .hero-table{
     .imgStyle{
-      width: 200px;
-      height: 130px;
+      width: 120px;
+      height: 80px;
       cursor: pointer;
     }
   }
@@ -264,8 +269,13 @@
       cursor: pointer;
     }
   }
-  .Tab-pagination{
-    margin: 20px;
+  .pagination{
+    margin: 0 auto;
+    display: inline-block;
+    .Tab-pagination{
+      margin: 20px 0;
+      width: 60%;
+    }
   }
 </style>
 <style lang="scss" scoped>
