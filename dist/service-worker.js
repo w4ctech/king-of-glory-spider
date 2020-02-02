@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "king-of-glory-spider/dist/precache-manifest.a5a52c717b7f96d17155c81a4448a833.js"
+  "./precache-manifest.a5a52c717b7f96d17155c81a4448a833.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "king-of-glory-spider"});
