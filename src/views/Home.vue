@@ -25,7 +25,7 @@
             label="英雄名"
             >
             <template slot-scope="HeroData" v-if="TabInfo == 'hero'">
-              <router-link :to="{name:'HeroInfo',params: { id: HeroData.row.ename}}"><el-button type="text" size="small">{{HeroData.row.cname}}</el-button></router-link>
+              <el-button type="text" size="small" @click="linkto(HeroData.row.ename)">{{HeroData.row.cname}}</el-button>
             </template>
           </el-table-column>
           <el-table-column
@@ -190,6 +190,7 @@
     this.$http.get(this.$api.Hero.List,true).then((result) => {
       this.bus.$emit('loading', false);
       this.HeroData = result
+      this.$store.commit('SaveInfo',result)
     })
   },
   methods:{
@@ -204,6 +205,7 @@
           this.bus.$emit('loading', true,'加载英雄列表中');
           this.$http.get(this.$api.Hero.List,true).then((result) => {
             this.HeroData = result
+            this.$store.commit('SaveInfo',result)
             this.bus.$emit('loading', false);
           })
           break
@@ -224,8 +226,10 @@
         default:
           return e
       }
+    },
+    linkto(e){
+      this.$router.push({ name: 'HeroInfo', params: { id: e }})
     }
-
   }
 }
 </script>

@@ -8,22 +8,42 @@
     name:'HeroInfo',
     data(){
       return{
-        infoSrc:''
+        infoSrc:'',
+        HeroInfo:this.$store.state.HeroInfo,
+        OhterInfo:[]
       }
     },
     mounted(){
-      let param = this.$route.path.replace(/[^0-9]/ig,"");
-      this.infoSrc = 'https://pvp.qq.com/web201605/herodetail/m/'+param+'.html'
-      if(Number(param)){
-        let css = document.createElement('link');
-        css.href = 'http://ssl.w4ctech.cn/css/global.css';
-        css.rel = 'stylesheet';
-        css.type = 'text/css';
-        document.head.appendChild(css);
-        console.log(param)
+      this.HeroInfo.forEach((value)=>{
+        if(this.$route.params.id == value.ename){
+          console.log(this.$route.params.id == value.ename)
+          this.infoSrc = 'https://pvp.qq.com/web201605/herodetail/m/'+this.$route.params.id+'.html'
+          let css = document.createElement('link');
+          css.href = 'http://ssl.w4ctech.cn/css/global.css';
+          css.rel = 'stylesheet';
+          css.type = 'text/css';
+          document.head.appendChild(css);
+        }else {
+          this.OhterInfo.push(value)
+        }
+      })
+      if(this.OhterInfo.length == this.HeroInfo.length){
+        this.GoHome()
       }
-      let iframeObj = document.getElementById("infoSrc").contentWindow.document
-      console.log(iframeObj,'...................iframeObj' )
+    },
+    methods:{
+      GoHome(){
+        this.$message({
+          message: '找不到这个页面，3秒后跳转到首页',
+          type: 'warning'
+        });
+        setTimeout(()=>{
+          this.$router.push({ path: '/' })
+        },1000)
+        setTimeout(()=>{
+          this.$message.closeAll()
+        },1000)
+      },
     },
     destroyed() {
       let links = document.getElementsByTagName("link");
