@@ -20,6 +20,8 @@ Vue.prototype.$http = http
 Vue.prototype.bus = new Vue
 Vue.use(ElementUI)
 Vue.use(preview)
+// @ts-ignore
+// @ts-ignore
 new Vue({
   router,
   store,

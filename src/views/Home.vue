@@ -186,12 +186,7 @@
     }
   },
   mounted() {
-    this.bus.$emit('loading', true,'加载英雄列表中');
-    this.$http.get(this.$api.Hero.List,true).then((result) => {
-      this.bus.$emit('loading', false);
-      this.HeroData = result
-      this.$store.commit('SaveInfo',result)
-    })
+    this.info('hero')
   },
   methods:{
     handleCurrentChange(currentPage) {

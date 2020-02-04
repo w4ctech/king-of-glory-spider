@@ -23,11 +23,11 @@
           css.rel = 'stylesheet';
           css.type = 'text/css';
           document.head.appendChild(css);
-        }else {
+        }else{
           this.OhterInfo.push(value)
         }
       })
-      if(this.OhterInfo.length == this.HeroInfo.length){
+      if(this.OhterInfo.length == this.HeroInfo.length || location.pathname == '/HeroInfo/'){
         this.GoHome()
       }
     },
