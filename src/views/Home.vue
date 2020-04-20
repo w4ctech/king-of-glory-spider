@@ -199,6 +199,7 @@
         case 'hero':
           this.bus.$emit('loading', true,'加载英雄列表中');
           this.$http.get(this.$api.Hero.List,true).then((result) => {
+            this.$previewRefresh()
             this.HeroData = result
             this.$store.commit('SaveInfo',result)
             this.bus.$emit('loading', false);
@@ -207,6 +208,7 @@
         case 'equip':
           this.bus.$emit('loading', true,'加载装备列表中');
           this.$http.get(this.$api.Hero.Equip,true).then((result) => {
+            this.$previewRefresh()
             this.EquipData = result
             this.bus.$emit('loading', false);
           })
@@ -214,6 +216,7 @@
         case 'inscription':
           this.bus.$emit('loading', true,'加载铭文列表中');
           this.$http.get(this.$api.Hero.Inscription,true).then((result) => {
+            this.$previewRefresh()
             this.InscriptionData = result
             this.bus.$emit('loading', false);
           })
