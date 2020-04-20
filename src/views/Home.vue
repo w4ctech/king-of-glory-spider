@@ -201,41 +201,41 @@
       switch (e) {
         case 'hero':
           this.bus.$emit('loading', true,'加载英雄列表中');
-          this.$http.get(this.$api.Hero.List,true).then((result) => {
+          // this.$http.get(this.$api.Hero.List,true).then((result) => {
             this.$previewRefresh()
-            if(result){
-              this.HeroData = result
-              this.$store.commit('SaveInfo',result)
-            }else{
+            // if(result){
+            //   this.HeroData = result
+              // this.$store.commit('SaveInfo',result)
+            // }else{
               this.HeroData = herolist
               this.$store.commit('SaveInfo',herolist)
-            }
+            // }
             this.bus.$emit('loading', false);
-          })
+          // })
           break
         case 'equip':
           this.bus.$emit('loading', true,'加载装备列表中');
-          this.$http.get(this.$api.Hero.Equip,true).then((result) => {
+          // this.$http.get(this.$api.Hero.Equip,true).then((result) => {
             this.$previewRefresh()
-            if(result){
-              this.EquipData = result
-            }else{
+            // if(result){
+            //   this.EquipData = result
+            // }else{
               this.EquipData = item
-            }
+            // }
             this.bus.$emit('loading', false);
-          })
+          // })
           break
         case 'inscription':
           this.bus.$emit('loading', true,'加载铭文列表中');
-          this.$http.get(this.$api.Hero.Inscription,true).then((result) => {
+          // this.$http.get(this.$api.Hero.Inscription,true).then((result) => {
             this.$previewRefresh()
-            if(result){
+            // if(result){
               this.InscriptionData = result
-            }else{
+            // }else{
               this.InscriptionData = ming
-            }
+            // }
             this.bus.$emit('loading', false);
-          })
+          // })
           break
         default:
           return e
