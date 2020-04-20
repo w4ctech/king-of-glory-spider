@@ -130,7 +130,7 @@
       </el-main>
       <el-footer>
         <el-row :gutter="20">
-          <el-col :span="24"><div class="grid-content bg-purple"></div>host by <a href="https://w4ctech.js.org/king-of-glory-spider/dist/index.html">king-of-glory-spider</a></el-col>
+          <el-col :span="24"><div class="grid-content bg-purple"></div>host by <a href="https://king-of-glory-spider.now.sh/">king-of-glory-spider</a></el-col>
         </el-row>
       </el-footer>
       <template>
@@ -201,28 +201,41 @@
       switch (e) {
         case 'hero':
           this.bus.$emit('loading', true,'加载英雄列表中');
-          // this.$http.get(this.$api.Hero.List,true).then((result) => {
+          this.$http.get(this.$api.Hero.List,true).then((result) => {
             this.$previewRefresh()
-            this.HeroData = herolist
-            this.$store.commit('SaveInfo',herolist)
+            if(result){
+              this.HeroData = result
+              this.$store.commit('SaveInfo',result)
+            }else{
+              this.HeroData = herolist
+              this.$store.commit('SaveInfo',herolist)
+            }
             this.bus.$emit('loading', false);
-          // })
+          })
           break
         case 'equip':
           this.bus.$emit('loading', true,'加载装备列表中');
-          // this.$http.get(this.$api.Hero.Equip,true).then((result) => {
+          this.$http.get(this.$api.Hero.Equip,true).then((result) => {
             this.$previewRefresh()
-            this.EquipData = item
+            if(result){
+              this.EquipData = result
+            }else{
+              this.EquipData = item
+            }
             this.bus.$emit('loading', false);
-          // })
+          })
           break
         case 'inscription':
           this.bus.$emit('loading', true,'加载铭文列表中');
-          // this.$http.get(this.$api.Hero.Inscription,true).then((result) => {
+          this.$http.get(this.$api.Hero.Inscription,true).then((result) => {
             this.$previewRefresh()
-            this.InscriptionData = ming
+            if(result){
+              this.InscriptionData = result
+            }else{
+              this.InscriptionData = ming
+            }
             this.bus.$emit('loading', false);
-          // })
+          })
           break
         default:
           return e
