@@ -193,33 +193,36 @@
       this.currentPage = currentPage;
     },
     info(e){
+      let herolist = require('../../spider/api/herolist.json')
+      let ming = require('../../spider/api/ming.json')
+      let item = require('../../spider/api/item.json')
       this.TabInfo = e
       this.currentPage = 1
       switch (e) {
         case 'hero':
           this.bus.$emit('loading', true,'加载英雄列表中');
-          this.$http.get(this.$api.Hero.List,true).then((result) => {
+          // this.$http.get(this.$api.Hero.List,true).then((result) => {
             this.$previewRefresh()
-            this.HeroData = result
-            this.$store.commit('SaveInfo',result)
+            this.HeroData = herolist
+            this.$store.commit('SaveInfo',herolist)
             this.bus.$emit('loading', false);
-          })
+          // })
           break
         case 'equip':
           this.bus.$emit('loading', true,'加载装备列表中');
-          this.$http.get(this.$api.Hero.Equip,true).then((result) => {
+          // this.$http.get(this.$api.Hero.Equip,true).then((result) => {
             this.$previewRefresh()
-            this.EquipData = result
+            this.EquipData = item
             this.bus.$emit('loading', false);
-          })
+          // })
           break
         case 'inscription':
           this.bus.$emit('loading', true,'加载铭文列表中');
-          this.$http.get(this.$api.Hero.Inscription,true).then((result) => {
+          // this.$http.get(this.$api.Hero.Inscription,true).then((result) => {
             this.$previewRefresh()
-            this.InscriptionData = result
+            this.InscriptionData = ming
             this.bus.$emit('loading', false);
-          })
+          // })
           break
         default:
           return e
