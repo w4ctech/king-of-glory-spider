@@ -12,7 +12,7 @@
     "axios": "^0.19.2",
     "core-js": "^3.4.4",
     "element-ui": "^2.13.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "register-service-worker": "^1.6.2",
     "request": "^2.88.0",
     "sass-loader": "^8.0.2",
